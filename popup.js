@@ -19,13 +19,6 @@ function gclient_geocode(address) {
         var latlng = json.results[0].geometry.location;
         latlng = latlng.lat + ',' + latlng.lng;
 
-        var src = "https://maps.google.com/staticmap?center=" + latlng +
-                  "&markers=" + latlng + "&zoom=14" +
-                  "&size=512x512&sensor=false&key=" + maps_key;
-
-        var map = document.getElementById("map");
-        map.src = src;
-
         var address_components = json.results[0].address_components
         var street_number = null;
         var street_name = null;
@@ -50,6 +43,10 @@ function gclient_geocode(address) {
                 if (request2.status == 200) {
                     console.log("request2 succeeded");
                     var json2 = JSON.parse(request2.responseText);
+                    
+                    var text = document.getElementById("text");
+					text.innerText = json2;
+					
                     console.log(request2.responseText);
                 } else {
                     console.log("request2 status not 200");
